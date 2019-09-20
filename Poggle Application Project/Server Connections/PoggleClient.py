@@ -16,6 +16,13 @@ except socket.error as e:
 
 def threaded_client(conn):
     conn.send(str.encode('welcome, type a message'))
+    print("Successfully connected! Host:",host,"Port:",port)
+    x = 0
+    while x == 0:
+        i = input("Enter a message: ")
+        #i = "".encode()
+        #i = b""
+        print(i)
 
     while True:
         data = conn.recv(2048)
