@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import tkinter as root
-import PythonFile as pf
+import PoggleBody as pf
 import random
 
 window = root.Tk()
