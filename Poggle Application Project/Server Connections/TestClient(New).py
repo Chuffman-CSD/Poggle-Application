@@ -21,22 +21,22 @@ def Main():
         # message sent to server 
         s.send(message.encode('ascii')) 
   
-        # messaga received from server 
+        # message received from server 
         data = s.recv(1024) 
   
         # print the received message 
         # here it would be a reverse of sent message 
         print('Received from the server :',str(data.decode('ascii'))) 
   
-        # ask the client whether he wants to continue 
+        # ask the client whether they want to continue 
         ans = input('\nDo you want to continue(y/n) :') 
         if ans == 'y': 
             #continue
-            if port == 12345 and host == '127.0.0.1':
-                print("\nSend a message, q to quit\n")
-                ui = input("Username_here: ").capitalize()
-                while ui != ("Q"):
-                    ui = input("Username_here: ").capitalize()
+            print("\nSend a message, q to quit\n")
+            ui1 = input("Username_here: ").capitalize()
+            while ui1 != ("Q"):
+                ui_main = input("Username_here: ").capitalize()
+                    
         else: 
             break
     # close the connection 
