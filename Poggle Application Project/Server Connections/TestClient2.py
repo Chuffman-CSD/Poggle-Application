@@ -26,19 +26,24 @@ def Main():
   
         # print the received message 
         # here it would be a reverse of sent message 
-        print('Received from the server :',str(data.decode('ascii'))) 
-  
-        # ask the client whether they want to continue 
-        ans = input('\nDo you want to continue(y/n) :') 
-        if ans == 'y': 
-            #continue
-            print("\nSend a message, q to quit\n")
-            ui1 = input("Username_here: ").capitalize()
-            while ui1 != ("Q"):
-                ui_main = input("Username_here: ").capitalize()
+        print("Received from the server",message)
+        
+        def Test():
+            # ask the client whether they want to continue
+            ans = input('\nDo you want to continue(y/n) :') 
+            if ans == 'y': 
+                #continue
+                print("\nSend a message, q to quit\n")
+                ui1 = input("Username_here: ").capitalize()
+                while ui1 != ("Q"):
+                    ui_main = input("Username_here: ").capitalize()
+                    u_message = ui_main
+                    s.send(u_message.encode('ascii'))
+                    print("Test")
+        Test()
                     
-        else: 
-            break
+        #else: 
+            #break
     # close the connection 
     s.close() 
   

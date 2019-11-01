@@ -1,7 +1,7 @@
 # import socket programming library 
 import socket
 from TestClient2 import Main
-  
+
 # import thread module 
 from _thread import *
 import threading 
@@ -24,7 +24,7 @@ def threaded(c):
             #break
   
         # reverse the given string from client 
-        #data = data[::-1] 
+        data = data[::-1] 
   
         # send back reversed string to client 
         c.send(data) 
@@ -47,6 +47,8 @@ def Main():
     # put the socket into listening mode 
     s.listen(5) 
     print("socket is listening")
+    #s.close()
+    #print("Server has been closed!")
   
     # a forever loop until client wants to exit 
     while True: 
@@ -57,11 +59,12 @@ def Main():
         # lock acquired by client 
         #print_lock.acquire() 
         print('Connected to :', addr[0], ':', addr[0]) 
-  
+        
         # Start a new thread and return its identifier 
         start_new_thread(threaded, (c,)) 
-    s.close() 
+        s.close()
+        print("Server has been closed!")
+
   
-  
-if __name__ == '__main__': 
-    Main() 
+if __name__ == '__main__':
+    Main()
