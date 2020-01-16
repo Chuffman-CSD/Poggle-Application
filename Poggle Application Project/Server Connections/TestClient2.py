@@ -1,5 +1,6 @@
 # Import socket module 
-import socket 
+import socket
+from PoggleServer import *
   
   
 def Main(): 
@@ -22,7 +23,8 @@ def Main():
         s.send(message.encode('ascii')) 
   
         # message received from server 
-        data = s.recv(1024) 
+        data = s.recv(1024)
+        print(data)
   
         # print the received message 
         # here it would be a reverse of sent message 
@@ -32,14 +34,15 @@ def Main():
             # ask the client whether they want to continue
             ans = input('\nDo you want to continue(y/n) :') 
             if ans == 'y': 
-                #continue
                 print("\nSend a message, q to quit\n")
                 ui1 = input("Username_here: ").capitalize()
                 while ui1 != ("Q"):
+                    #print(data)
                     ui_main = input("Username_here: ").capitalize()
                     u_message = ui_main
                     s.send(u_message.encode('ascii'))
-                    print("Test")
+                    print(u_message)
+                    Messages.append(u_message)
         Test()
                     
         #else: 

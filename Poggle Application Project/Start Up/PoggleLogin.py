@@ -1,38 +1,72 @@
 #!/usr/bin/python3
-import tkinter as root
+import tkinter as tk
 import PoggleBody as pf
 import random
 
-window = root.Tk()
+IN_USE_USERNAMES = ["admin","test","1","2",""]
 
-window.title("Login")
+DEFAULT = ("Times New Roman", 15)
 
-window.geometry("325x250")
+COLORS = ["black","yellow"]
 
-def proceed():
-    x = 1
-    if userNameBox.get() == (""):
-        frame = pf.Frame()
-        window.destroy()
-    else:
-        frame = pf.Frame(userNameBox.get())
-        window.destroy()
+color_mode = 0
 
-# -- informations label --
-infoLabel = root.Label(text=" \n Welcome, please login to proceed or register \n")
-infoLabel.grid()
-# -- username text label --
-usernameLabel = root.Label(text="Enter a username:")
-usernameLabel.grid(column=0, row=1)
-# -- username text box --():
-userNameBox = root.Entry()
-userNameBox.grid(column=0,row=2)
-# -- login button --
-loginButton = root.Button(text="Continue",command=proceed)
-loginButton.grid(column=0,row=7)
-# -- Username in use label --
-infoLabel = root.Label(text="\n Error: Username is in use! \n")
-infoLabel.grid()
+class Login(tk.Frame):
 
-window.mainloop()
+    def __init__(self):
+        tk.Frame.__init__(self)
+        # -- informations label --
+        self.infoLabel = tk.Label(self, text=" \n Welcome, please login to proceed or register \n", font = DEFAULT, bg = "black", fg = "white")
+        self.infoLabel.grid(column = 0, row = 1)
+        #self.infoLabel.grid()
+
+        # -- username text label --
+        self.usernameLabel = tk.Label(self, text="Enter a username:",font = DEFAULT, bg = "black", fg = "white")
+        self.usernameLabel.grid(column = 0, row = 2)
+        #self.usernameLabel.grid()
+
+        # -- username text box --
+        self.userNameBox = tk.Entry(self, font = DEFAULT)
+        self.userNameBox.grid(column = 0, row = 3)
+        #self.userNameBox.grid()
+
+        # -- login button --
+        self.loginButton = tk.Button(self, text="Continue",command=self.proceed,bg="Green",font = DEFAULT,)
+        self.loginButton.grid(column = 0, row = 4)
+        #self.loginButton.grid()
+
+        # -- Username in use label --
+        self.infoLabel = tk.Label(self,text="\n Error: Username is in use! \n",font = DEFAULT, bg = "black", fg = "black")
+        self.infoLabel.grid(column = 0, row = 5)
+        #self.infoLabel.grid()
+
+    def proceed(self):
+        global color_mode
+        global error_count
+        if self.userNameBox.get() in IN_USE_USERNAMES and color_mode == 0:
+            self.infoLabel.configure(text="\n Error: Username is in use!\n", font = DEFAULT, fg = COLORS[1])
+        elif self.userNameBox.get() not in IN_USE_USERNAMES:
+            characterCount = self.userNameBox.get()
+            if len(characterCount) > 12:
+                self.infoLabel.configure(text="\n Error: Username is too long!\n", font = DEFAULT, fg = COLORS[1])
+                print("Error: Username too long!")
+            elif len(characterCount) < 4:
+                self.infoLabel.configure(text="\n Error: Username is too short!\n", font = DEFAULT, fg = COLORS[1]) #Character count will be 20 characters
+                print("Error: Username too short!")
+            else:
+                frame = pf.Frame(Name=self.userNameBox.get())
+                root.destroy()
+        else:
+            print("\nSomething went wrong..\n")
+
+root = tk.Tk()
+root.title("Login")
+
+root.geometry("380x240")
+
+frame_login = Login()
+frame_login.configure(background="black")
+frame_login.grid(row = 0, column = 0)
+                 
+root.mainloop()
 
